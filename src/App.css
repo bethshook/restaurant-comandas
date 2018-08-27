@@ -2,6 +2,23 @@
   text-align: center;
 }
 
+.Flex-wrap{
+  display: flex;
+  flex-flow: row wrap;
+  padding: 20px 60px;
+  justify-content: space-around;
+}
+
+.Comanda-widget, .Menu-widget{
+  padding: 20px;
+}
+
+.Menu-widget{
+  background-color: lightblue;
+  border-radius: 5px;
+  width: 33%;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -20,6 +37,22 @@
 
 .App-intro {
   font-size: large;
+}
+
+.Add-btn{
+  background-color: white;
+}
+
+h1{
+  margin: 30px 0;
+}
+
+button {
+  font-size: .8em;
+  margin: 10px;
+  background-color: lightblue;
+  border: none;
+  cursor: pointer;
 }
 
 @keyframes App-logo-spin {

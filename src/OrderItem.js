@@ -5,12 +5,12 @@ class MenuItem extends Component {
     constructor(props) {
         super(props);
 
-        this.onAddToOrder = this.onAddToOrder.bind(this);
+        this.onDelete = this.onDelete.bind(this);
     }
 
-    onAddToOrder() {
-        const { onAddToOrder, name} = this.props;
-        onAddToOrder(name);
+    onDelete() {
+        const { onDelete, name} = this.props;
+        onDelete(name);
     }
 
     render() {
@@ -19,7 +19,7 @@ class MenuItem extends Component {
         return (
             <div>
                 <p>{name} – ${price}
-                    <button className="Add-btn" onClick={this.onAddToOrder}>Agregar</button></p>
+                    <button onClick={this.onDelete}>Borrar</button></p>
             </div>
         );
     }

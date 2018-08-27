@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import MenuItem from './MenuItem';
+import OrderItem from './OrderItem';
 
 const items = [
     {
@@ -56,6 +57,8 @@ class App extends Component {
             items: JSON.parse(localStorage.getItem('items'))
         };
 
+        // this.onAdd = this.onAdd.bind(this);
+        this.onAddToOrder = this.onAddToOrder.bind(this);
         this.onDelete = this.onDelete.bind(this);
     }
 
@@ -69,6 +72,28 @@ class App extends Component {
        return this.state.items;
     }
 
+    onAddToOrder(name,price){
+        const order = this.getOrder();
+
+        order.push({
+            name,
+            price
+        })
+
+        this.setState( {order} )
+    }
+
+    // onAdd(name,price){
+    //     const items = this.getMenu();
+    //
+    //     items.push({
+    //         name,
+    //         price
+    //     })
+    //
+    //     this.setState({ items })
+    // }
+
     onDelete(name) {
         const items = this.getMenu();
         const filteredItems = items.filter(item => {
@@ -81,11 +106,31 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>El Califa - Comandas</h1>
+        <h1>El Califa App</h1>
+          <div className="Flex-wrap">
+          <div className="Menu-widget">
+              <h3>Menú</h3>
+              {
+                  this.state.items.map(item => {
+                      return (
+                          <MenuItem
+                              key={item.name}
+                              {...item}
+                              onDelete={this.onDelete}
+                          />
+                      )
+                  })
+              }
+          </div>
+          {/*<AddItem*/}
+            {/*onAdd={this.onAdd}*/}
+          {/*/>*/}
+          <div className="Comanda-widget">
+          <h3>Detalles de Comanda</h3>
           {
               this.state.items.map(item => {
                   return (
-                      <MenuItem
+                      <OrderItem
                           key={item.name}
                           {...item}
                           onDelete={this.onDelete}
@@ -93,6 +138,8 @@ class App extends Component {
                   )
               })
           }
+          </div>
+          </div>
       </div>
     );
   }
