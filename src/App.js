@@ -4,13 +4,7 @@ import './App.css';
 import MenuItem from './MenuItem';
 import OrderItem from './OrderItem';
 
-const orderItems = [
-    {
-        name: 'test',
-        price: 5,
-        qty: 1
-    }
-];
+const orderItems = [];
 
 const items = [
     {
@@ -99,6 +93,7 @@ class App extends Component {
     compare(obj,arr) {
         for (let i=0; i<arr.length; i++) {
             if (arr[i].name === obj.name) {
+                arr[i].qty++;
                 return true;
             }
         }
@@ -108,9 +103,7 @@ class App extends Component {
         const orderItems = this.getOrder();
         const newItem = {name, price, qty};
 
-        if(this.compare(newItem,orderItems)) {
-            console.log('just updating qty')
-        } else {
+        if(!this.compare(newItem,orderItems)) {
             orderItems.push(newItem);
         }
 
