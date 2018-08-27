@@ -14,7 +14,7 @@ class MenuItem extends Component {
     }
 
     render() {
-        const { name, onDelete, price } = this.props;
+        const { name, price } = this.props;
 
         return (
             <div>

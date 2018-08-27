@@ -53,26 +53,29 @@ class App extends Component {
         super(props);
 
         this.state = {
-            items: []
+            items: JSON.parse(localStorage.getItem('items'))
         };
 
         this.onDelete = this.onDelete.bind(this);
     }
 
     componentWillMount() {
-        this.getMenu();
-    }
-
-    getMenu() {
-        const items = JSON.parse(localStorage.getItem('items'));
+        const items = this.getMenu();
 
         this.setState({ items });
     }
 
-    onDelete(name) {
-        console.log(name);
+    getMenu() {
+       return this.state.items;
+    }
 
-        //this.setState...
+    onDelete(name) {
+        const items = this.getMenu();
+        const filteredItems = items.filter(item => {
+            return item.name !== name;
+        });
+
+        this.setState({ items: filteredItems });
     }
 
   render() {
