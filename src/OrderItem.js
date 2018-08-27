@@ -14,11 +14,11 @@ class MenuItem extends Component {
     }
 
     render() {
-        const { name, price } = this.props;
+        const { name, price, qty } = this.props;
 
         return (
             <div>
-                <p>{name} – ${price}
+                <p>{name} – ${price} ({qty})
                     <button onClick={this.onDelete}>Borrar</button></p>
             </div>
         );

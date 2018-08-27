@@ -7,50 +7,61 @@ import OrderItem from './OrderItem';
 const orderItems = [
     {
         name: 'test',
-        price: 5
+        price: 5,
+        qty: 1
     }
 ];
 
 const items = [
     {
         name: 'Bistec',
-        price: 20
+        price: 20,
+        qty: 1
     },
     {
         name: 'Costilla',
-        price: 20
+        price: 20,
+        qty: 1
     },
     {
         name: 'Chuleta',
-        price: 20
+        price: 20,
+        qty: 1
     },
     {
         name: 'Gaona\'s',
-        price: 30
+        price: 30,
+        qty: 1
     },
     {
         name: 'Rib-Eye',
-        price: 30
+        price: 30,
+        qty: 1
     },
     {
         name: 'Pechuga',
-        price: 30
+        price: 30,
+        qty: 1
     },
     {
         name: 'Campechano',
-        price: 30
+        price: 30,
+        qty: 1
     },
     {
         name: 'Pastor',
-        price: 30
+        price: 30,
+        qty: 1
     },
     {
         name: 'Gringa',
-        price: 30
+        price: 30,
+        qty: 1
     },
     {
         name: 'Barbacoa',
-        price: 30
+        price: 30,
+        qty: 1
     }
     ];
 
@@ -85,13 +96,23 @@ class App extends Component {
         return this.state.orderItems;
     }
 
-    onAddToOrder(name,price){
-        const orderItems = this.getOrder();
+    compare(obj,arr) {
+        for (let i=0; i<arr.length; i++) {
+            if (arr[i].name === obj.name) {
+                return true;
+            }
+        }
+    }
 
-        orderItems.push({
-            name,
-            price
-        });
+    onAddToOrder(name,price,qty){
+        const orderItems = this.getOrder();
+        const newItem = {name, price, qty};
+
+        if(this.compare(newItem,orderItems)) {
+            console.log('just updating qty')
+        } else {
+            orderItems.push(newItem);
+        }
 
         this.setState( {orderItems} )
     }
