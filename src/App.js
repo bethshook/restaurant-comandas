@@ -4,6 +4,13 @@ import './App.css';
 import MenuItem from './MenuItem';
 import OrderItem from './OrderItem';
 
+const orderItems = [
+    {
+        name: 'test',
+        price: 5
+    }
+];
+
 const items = [
     {
         name: 'Bistec',
@@ -48,13 +55,15 @@ const items = [
     ];
 
 localStorage.setItem('items', JSON.stringify(items));
+localStorage.setItem('orderItems', JSON.stringify(orderItems));
 
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            items: JSON.parse(localStorage.getItem('items'))
+            items: JSON.parse(localStorage.getItem('items')),
+            orderItems: JSON.parse(localStorage.getItem('orderItems'))
         };
 
         // this.onAdd = this.onAdd.bind(this);
@@ -64,23 +73,27 @@ class App extends Component {
 
     componentWillMount() {
         const items = this.getMenu();
-
-        this.setState({ items });
+        const orderItems = this.getOrder();
+        this.setState({ items,orderItems });
     }
 
     getMenu() {
        return this.state.items;
     }
 
-    onAddToOrder(name,price){
-        const order = this.getOrder();
+    getOrder() {
+        return this.state.orderItems;
+    }
 
-        order.push({
+    onAddToOrder(name,price){
+        const orderItems = this.getOrder();
+
+        orderItems.push({
             name,
             price
-        })
+        });
 
-        this.setState( {order} )
+        this.setState( {orderItems} )
     }
 
     // onAdd(name,price){
@@ -95,12 +108,12 @@ class App extends Component {
     // }
 
     onDelete(name) {
-        const items = this.getMenu();
-        const filteredItems = items.filter(item => {
-            return item.name !== name;
+        const orderItems = this.getOrder();
+        const currentOrder = orderItems.filter(orderItem => {
+            return orderItem.name !== name;
         });
 
-        this.setState({ items: filteredItems });
+        this.setState({ orderItems: currentOrder });
     }
 
   render() {
@@ -116,7 +129,7 @@ class App extends Component {
                           <MenuItem
                               key={item.name}
                               {...item}
-                              onDelete={this.onDelete}
+                              onAddToOrder={this.onAddToOrder}
                           />
                       )
                   })
@@ -128,11 +141,11 @@ class App extends Component {
           <div className="Comanda-widget">
           <h3>Detalles de Comanda</h3>
           {
-              this.state.items.map(item => {
+              this.state.orderItems.map(orderItem => {
                   return (
                       <OrderItem
-                          key={item.name}
-                          {...item}
+                          key={orderItem.name}
+                          {...orderItem}
                           onDelete={this.onDelete}
                       />
                   )

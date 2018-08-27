@@ -9,8 +9,8 @@ class MenuItem extends Component {
     }
 
     onAddToOrder() {
-        const { onAddToOrder, name} = this.props;
-        onAddToOrder(name);
+        const { onAddToOrder, name, price} = this.props;
+        onAddToOrder(name, price);
     }
 
     render() {
